@@ -7,7 +7,7 @@ async def get_antenna_data(ip, username, password, command):
             ip,
             username=username,
             password=password,
-            known_hosts=None 
+            known_hosts=None  # Para pruebas, acepta clave sin verificar
         ) as conn:
             result = await conn.run(command, check=True)
             return result.stdout

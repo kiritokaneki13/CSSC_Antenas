@@ -84,9 +84,10 @@ async def process_antenna(antenna_id, antenna_data):
 
     antenna_data_dict = {sanitize_key(k): {sanitize_key(sk): sv for sk, sv in v.items()} for k, v in antenna_data_dict.items()}
 
+    # Añadimos la IP al diccionario final
     return {
         'nombre': antenna_data['nombre'],
-        'ip': ip, 
+        'ip': ip,  # Añadimos la IP aquí
         **antenna_data_dict
     }
 
@@ -94,11 +95,12 @@ async def aggregate_and_upload_antennas(antennas_data):
     timestamp = time.strftime('%Y-%m-%d %H:%M %p', time.localtime())
     aggregated_data = {
         'timestamp': timestamp,
-        'antennas': [data for data in antennas_data if data]  
+        'antennas': [data for data in antennas_data if data]  # Lista de antenas procesadas
     }
 
     ref = db.reference('antenas/aggregated_data')
     try:
+        # Sobrescribe solo el nodo 'antennas' con los datos más recientes
         ref.update({'antennas': aggregated_data['antennas']})
         print(f"Datos de todas las antenas actualizados con timestamp: {timestamp}")
     except Exception as e:

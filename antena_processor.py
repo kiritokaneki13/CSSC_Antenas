@@ -92,7 +92,7 @@ async def process_antenna(antenna_id, antenna_data):
 
 async def aggregate_and_upload_antennas(antennas_data):
     timestamp = time.strftime('%Y-%m-%d %H:%M %p', time.localtime())
-    aggregated_data = {
+    aggregated_data = 
         'timestamp': timestamp,
         'antennas': [data for data in antennas_data if data]  
     }
